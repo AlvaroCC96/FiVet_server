@@ -3,12 +3,7 @@
 namespace Fivet.ZeroIce
 {
     class Program
-    {/*
- * Created on Sun May 17 2020
- *
- * Copyright (c) 2020 Your Company
- */
-
+    {
         public static int Main(string[] args)
         {   /**
             * Server waiting connections 
@@ -17,9 +12,8 @@ namespace Fivet.ZeroIce
             {
                 using(Ice.Communicator communicator = Ice.Util.initialize(ref args))
                 {   
-                    //TODO: testing connections , failed with Java Client
                     var adapter = communicator.createObjectAdapterWithEndpoints("TheAdapter","default -p 8080 -z");
-                    adapter.add(new TheSystemImpl(), Ice.Util.stringToIdentity("TheSystem"));
+                    adapter.add(new TheSystemImpl(), Ice.Util.stringToIdentity("cl.ucn.disc.pdis.fivet.zeroice.model.TheSystem"));
                     adapter.activate();
                     communicator.waitForShutdown();
                 }
