@@ -2,14 +2,13 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-
+using Fivet.Dao;
 namespace Fivet.Server
 {
     class Program
     {
          static void Main(string[] args)
         {   
-            
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -28,7 +27,10 @@ namespace Fivet.Server
             })
             .UseConsoleLifetime()
             .ConfigureServices((hostContext, services) =>
-            {
+            {   
+                //FiveContext
+                services.AddDbContext<FivetContext>();
+                // The FivetService 
                 services.AddHostedService<FivetService>();
                 services.AddLogging();
                 services.Configure<HostOptions>(options =>{

@@ -23,11 +23,14 @@ namespace Fivet.Server
         {
             _logger.LogDebug("Starting the FivetService...");
             //The Adapter 
-            var adapter = _communicator.createObjectAdapterWithEndpoints("TheSystem","tcp -z -t 15000 -p "+_port);
+            var adapter = _communicator.createObjectAdapterWithEndpoints("Contratos","tcp -z -t 15000 -p "+_port);
 
             //The interface    
-            TheSystem theSystem = new TheSystemImpl();
-            adapter.add(theSystem,Util.stringToIdentity("TheSystem"));
+            //TheSystem theSystem = new TheSystemImpl();
+            //adapter.add(theSystem,Util.stringToIdentity("TheSystem"));
+            //adapter.add(theSystem,Util.stringToIdentity("TheSystem"));
+            Contratos contratos = new ContratosImpl();
+            adapter.add(contratos,Util.stringToIdentity("Contratos"));
             adapter.activate();
             return Task.CompletedTask;
         }
@@ -61,12 +64,58 @@ namespace Fivet.Server
         }
 
     }
+    public class ContratosSingleton {
 
-    public class TheSystemImpl : TheSystemDisp_
-    {
-        public override long getDelay(long clientTime, Current current = null)
+        private static ContratosSingleton instancia;
+        public static ContratosSingleton getInstancia(){
+            if (instancia != null) {
+                instancia = new ContratosSingleton();
+            }
+            return instancia;
+        }
+
+        
+    }
+    public class ContratosImpl: ContratosDisp_
+    {   
+        
+        public override Ficha obtenerFicha(int numero, Current current)
+        {
+            return null;
+        }
+
+        public override Ficha registrarFicha(Ficha ficha, Current current)
+        {
+            return null;
+        }
+
+        public override Persona registrarPersona(Persona persona, Current current)
+        {
+            return null;
+        }
+
+        public override Control registrarControl(Control control, Current current)
+        {
+            return null;
+        }
+
+        public override bool agregarFoto(Foto foto, Current current)
+        {
+            return false;
+        }
+         public override long getDelay(long clientTime, Current current=null)
         {
             return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - clientTime;
         }
+     
+    }
+
+    public class TheSystemImpl : TheSystemDisp_
+    {
+         public override long getDelay(long clientTime, Current current = null)
+        {
+            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - clientTime;
+        }
+    
     }
 }

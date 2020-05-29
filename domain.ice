@@ -29,12 +29,13 @@ module model {
     /**
      * Clase Persona
      */
+     ["cs:property"]
      class Persona{
 
         /**
          * Primary Key
          */
-        int id;
+        int uid;
 
         /**
          * Rut: 189725965
@@ -89,12 +90,13 @@ module model {
      /**
       * La ficha
       */
+     ["cs:property"] 
      class Ficha {
 
          /**
           * Primary Key
           */
-         int id;
+         int uid;
 
          /**
           * Numero
@@ -138,12 +140,13 @@ module model {
      /**
      * Clase control
      */
+     ["cs:property"]
      class Control {
 
      /**
-     * id del examen
+     * id del control
      */
-     int id;
+     int uid;
 
      /**
      * fecha del contol
@@ -182,17 +185,23 @@ module model {
       * nombre del veterinario encargado
       */
       string nombreVeterinario;
+
+      /*
+      *url o nombre del archivo de la foto
+      */
+      string urlFoto;
     }
 
     /**
     * La foto de la ficha
     */
+    ["cs:property"]
     class Foto{
 
         /**
         * id del examen
         */
-        int id;
+        int uid;
 
         /*
         *url o nombre del archivo de la foto
@@ -203,12 +212,13 @@ module model {
     /**
     * Examen asociado a un control
     */
+    ["cs:property"]
     class Examen{
 
         /**
         * id del examen
         */
-        int id;
+        int uid;
 
         /**
         *nombre del examen
@@ -244,10 +254,15 @@ module model {
         */
         Ficha obtenerFicha(int numero);
 
-        Ficha registarFicha (Ficha ficha);
-        Persona registarPersona (Persona persona);
-        Control registarControl (Control control);
+        Ficha registrarFicha (Ficha ficha);
+        Persona registrarPersona (Persona persona);
+        Control registrarControl (Control control);
         bool agregarFoto (Foto foto);
+
+         /**
+         * @return the diference in time between client and server.
+         */
+        long getDelay(long clientTime);
      }
 
 }
