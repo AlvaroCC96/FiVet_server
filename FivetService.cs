@@ -67,12 +67,5 @@ namespace Fivet.Server
 
     }
 
-    public class TheSystemImpl : TheSystemDisp_
-    {
-         public override long getDelay(long clientTime, Current current = null)
-        {
-            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - clientTime;
-        }
-    
-    }
+   
 }
