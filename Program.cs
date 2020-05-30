@@ -3,6 +3,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Fivet.Dao;
+using Fivet.ZeroIce;
+using Fivet.ZeroIce.model;
+
+
 namespace Fivet.Server
 {
     class Program
@@ -28,6 +32,10 @@ namespace Fivet.Server
             .UseConsoleLifetime()
             .ConfigureServices((hostContext, services) =>
             {   
+                //TheSystem
+                services.AddSingleton<TheSystemDisp_,TheSystemImpl>();
+                //Contratos
+                services.AddSingleton<ContratosDisp_,ContratosImpl>();
                 //FiveContext
                 services.AddDbContext<FivetContext>();
                 // The FivetService 
