@@ -5,6 +5,7 @@ using Fivet.ZeroIce.model;
 using Ice;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using Fivet.ZeroIce;
 
 namespace Fivet.Server
 {
@@ -29,8 +30,9 @@ namespace Fivet.Server
             //TheSystem theSystem = new TheSystemImpl();
             //adapter.add(theSystem,Util.stringToIdentity("TheSystem"));
             //adapter.add(theSystem,Util.stringToIdentity("TheSystem"));
-            Contratos contratos = new ContratosImpl();
-            adapter.add(contratos,Util.stringToIdentity("Contratos"));
+           
+            //Contratos contratos = new ContratosImpl(logger,);
+            //adapter.add(contratos,Util.stringToIdentity("Contratos"));
             adapter.activate();
             return Task.CompletedTask;
         }
@@ -63,51 +65,6 @@ namespace Fivet.Server
             return Ice.Util.initialize(initializationData);
         }
 
-    }
-    public class ContratosSingleton {
-
-        private static ContratosSingleton instancia;
-        public static ContratosSingleton getInstancia(){
-            if (instancia != null) {
-                instancia = new ContratosSingleton();
-            }
-            return instancia;
-        }
-
-        
-    }
-    public class ContratosImpl: ContratosDisp_
-    {   
-        
-        public override Ficha obtenerFicha(int numero, Current current)
-        {
-            return null;
-        }
-
-        public override Ficha registrarFicha(Ficha ficha, Current current)
-        {
-            return null;
-        }
-
-        public override Persona registrarPersona(Persona persona, Current current)
-        {
-            return null;
-        }
-
-        public override Control registrarControl(Control control, Current current)
-        {
-            return null;
-        }
-
-        public override bool agregarFoto(Foto foto, Current current)
-        {
-            return false;
-        }
-         public override long getDelay(long clientTime, Current current=null)
-        {
-            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - clientTime;
-        }
-     
     }
 
     public class TheSystemImpl : TheSystemDisp_

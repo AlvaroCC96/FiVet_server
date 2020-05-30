@@ -21,7 +21,7 @@ namespace Fivet.Dao
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   // update de model and example for Insert the data for Persona
+        {   // update model and example for Insert method to Persona Table
             modelBuilder.Entity<Persona>(p =>
             {
                 p.HasKey(p=> p.uid);
