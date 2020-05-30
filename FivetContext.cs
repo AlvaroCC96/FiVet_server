@@ -5,13 +5,20 @@ using Microsoft.EntityFrameworkCore;
 namespace Fivet.Dao
 {
     public class FivetContext: DbContext
-    {
+    {   
+        /// <summary>
+        ///  DbSets for tables
+        /// </summary>
+        /// <value></value>
         public DbSet<Persona> Personas {get;set;}
         public DbSet<Ficha> Fichas {get;set;}
         public DbSet<Control> Controles {get;set;}
         public DbSet<Foto> Fotos {get;set;}
         public DbSet<Examen> Examenes {get;set;}
-
+        /// <summary>
+        /// create a schema in fivet.db
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source = fivet.db",options=>{
@@ -19,7 +26,10 @@ namespace Fivet.Dao
             });
             base.OnConfiguring(optionsBuilder);
         }
-
+        /// <summary>
+        ///  creations of tables
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   // update model and example for Insert method to Persona Table
             modelBuilder.Entity<Persona>(p =>
@@ -38,34 +48,6 @@ namespace Fivet.Dao
                     apellido="Castillo",
                     direccion="Antilhue 1350",
                     email = "alvarocc96@gmail.com"
-                }
-            );
-
-            // update the model and example for Insert the data for Contrl
-            modelBuilder.Entity<Control>(c =>
-            {
-                c.HasKey(c=> c.uid);
-                c.Property(c=> c.fechaControl).IsRequired();
-                c.Property(c=> c.fechaProximoControl).IsRequired();
-                c.Property(c=> c.temperatura).IsRequired();
-                c.Property(c=> c.peso).IsRequired();
-                c.Property(c=> c.altura).IsRequired();
-                c.Property(c=> c.diagnostico).IsRequired();
-                c.Property(c=> c.nombreVeterinario).IsRequired();
-                //c.Property(c=> c.urlFoto).IsRequired();
-            });
-
-            modelBuilder.Entity<Control>().HasData(
-                new Control()
-                {
-                    uid = 1,
-                    fechaControl ="fecha1",
-                    fechaProximoControl="fecha2",
-                    temperatura = 30f,
-                    peso= 20f,
-                    altura=30,
-                    diagnostico="muy malito",
-                    nombreVeterinario="Dr Simi"
                 }
             );
 
@@ -141,6 +123,21 @@ namespace Fivet.Dao
                     uid = 1,
                     nombreExamen ="Nombre Del Examen",
                     fechaExamen = "Fecha Examen",
+                }
+            );
+
+             // update the model and example for Insert the data for Foto
+            modelBuilder.Entity<Foto>(fo =>
+            {
+                fo.HasKey(fo=> fo.uid);
+                fo.Property(fo=> fo.urlFoto).IsRequired();
+            });
+
+            modelBuilder.Entity<Foto>().HasData(
+                new Foto()
+                {
+                    uid = 1,
+                    urlFoto ="url"
                 }
             );
         }

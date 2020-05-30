@@ -257,7 +257,7 @@ module model {
         Ficha registrarFicha (Ficha ficha);
         Persona registrarPersona (Persona persona);
         Control registrarControl (Control control);
-        bool agregarFoto (Foto foto);
+        Foto agregarFoto (Foto foto);
 
          /**
          * @return the diference in time between client and server.
